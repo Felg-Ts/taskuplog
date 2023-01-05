@@ -1,9 +1,13 @@
 # Aplicación Flask
 
-from flask import Flask, request
+from flask import Flask, request, render_template
 import mysql.connector
 
 app = Flask(__name__)
+
+@app.route('/',methods=["GET"])
+def inicio():
+    return render_template("insert.html",errormesaje=" ")
 
 # Ruta que maneja el envío del formulario
 @app.route('/insertar', methods=['POST'])
@@ -31,7 +35,7 @@ def insertar():
   cursor.close()
   conn.close()
   
-  return 'Información insertada correctamente'
+  return render_template("insert.html",errormesaje=" ")
 
 if __name__ == '__main__':
   app.run()
