@@ -22,11 +22,11 @@ def insertar():
   db = 1 if 'db' in request.form else 0
 
   # Crear consulta de inserción
-  query = "INSERT INTO tabla (servidor, plugin, version, fecha, obsoleto, premium, db) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+  query = "INSERT INTO registro (servidor, plugin, version, fecha, obsoleto, premium, db) VALUES (%s, %s, %s, %s, %s, %s, %s)"
   values = (servidor, plugin, version, fecha, obsoleto, premium, db)
 
   # Conectarse a la base de datos y ejecutar consulta
-  conn = mysql.connector.connect(host='localhost', user='usuario', password='contraseña', database='nombre_de_la_bd')
+  conn = mysql.connector.connect(host='192.168.50.29', user='taskuploguser', password='taskuplogpass', database='taskuplogdb')
   cursor = conn.cursor()
   cursor.execute(query, values)
   conn.commit()
@@ -38,4 +38,4 @@ def insertar():
   return render_template("insert.html",errormesaje=" ")
 
 if __name__ == '__main__':
-  app.run()
+  app.run("0.0.0.0",5000,debug=True)
