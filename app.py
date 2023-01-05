@@ -1,55 +1,37 @@
-#connection
+# Aplicación Flask
 
+from flask import Flask, request
 import mysql.connector
-from mysql.connector import errorcode
 
-def connect():
-    try:
-        cnx = mysql.connector.connect(user='your-username',
-                                      password='your-password',
-                                      host='your-host',
-                                      database='your-database')
-        return cnx
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print("Something is wrong with your user name or password")
-        elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print("Database does not exist")
-        else:
-            print(err)
+app = Flask(__name__)
 
-def execute_query(query, params):
-    cnx = connect()
-    cursor = cnx.cursor()
-    cursor.execute(query, params)
-    cnx.commit()
-    cursor.close()
-    cnx.close()
+# Ruta que maneja el envío del formulario
+@app.route('/insertar', methods=['POST'])
+def insertar():
+  # Recoger datos del formulario
+  servidor = request.form['server']
+  plugin = request.form['plugin']
+  version = request.form['version']
+  fecha = request.form['date']
+  obsoleto = 1 if 'obsolete' in request.form else 0
+  premium = 1 if 'premium' in request.form else 0
+  db = 1 if 'db' in request.form else 0
 
-#Ruta De Login
+  # Crear consulta de inserción
+  query = "INSERT INTO tabla (servidor, plugin, version, fecha, obsoleto, premium, db) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+  values = (servidor, plugin, version, fecha, obsoleto, premium, db)
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        # Obtener datos del formulario
-        username = request.form['username']
-        password = request.form['password']
+  # Conectarse a la base de datos y ejecutar consulta
+  conn = mysql.connector.connect(host='localhost', user='usuario', password='contraseña', database='nombre_de_la_bd')
+  cursor = conn.cursor()
+  cursor.execute(query, values)
+  conn.commit()
 
-        # Comprobar si el nombre de usuario y la contraseña son válidos
-        query = "SELECT * FROM users WHERE username=%s AND password=%s"
-        params = (username, password)
-        result = execute_query(query, params)
+  # Cerrar cursor y conexión
+  cursor.close()
+  conn.close()
+  
+  return 'Información insertada correctamente'
 
-        # Si se obtiene un resultado, iniciar sesión
-        if result:
-            session['logged_in'] = True
-            flash('You are logged in')
-            return redirect(url_for('home'))
-
-        # Si no se obtiene un resultado, mostrar mensaje de error
-        else:
-            error = 'Invalid username or password'
-            return render_template('login.html', error=error)
-
-    # Si el método es GET, mostrar formulario de inicio de sesión
-    return render_template('login.html')
+if __name__ == '__main__':
+  app.run()

@@ -1,33 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-
-    body {
-        background: linear-gradient(to right, orange, #ec38bc, #7303c0, cyan);   
-
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-    }
-
-    tr:nth-child(even) {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-    }
-  </style>
-</head>
-<body>
-
+{% extends "base.html" %}
+{% block style %}<link rel="stylesheet" type="text/css" media="all" href="{{url_for("static", filename='css/style-query.css')}}">{% endblock %}
+{% block title %}Registro De Actualizaciones{% endblock %}
+{% block body %}
 <table>
   <tr>
     <th>Servidor</th>
@@ -66,6 +40,4 @@
     <td>DB 3</td>
   </tr>
 </table>
-
-</body>
-</html>
+{% endblock %}

@@ -1,0 +1,21 @@
+body {
+    background: linear-gradient(to right, orange, #ec38bc, #7303c0, cyan);   
+
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
