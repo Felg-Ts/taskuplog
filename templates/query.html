@@ -12,32 +12,17 @@
     <th>Premium</th>
     <th>DB</th>
   </tr>
-  <tr>
-    <td>Servidor 1</td>
-    <td>Plugin 1</td>
-    <td>1.0</td>
-    <td>01/01/2020</td>
-    <td>No</td>
-    <td>Sí</td>
-    <td>DB 1</td>
-  </tr>
-  <tr>
-    <td>Servidor 2</td>
-    <td>Plugin 2</td>
-    <td>2.0</td>
-    <td>01/02/2020</td>
-    <td>Sí</td>
-    <td>No</td>
-    <td>DB 2</td>
-  </tr>
-  <tr>
-    <td>Servidor 3</td>
-    <td>Plugin 3</td>
-    <td>3.0</td>
-    <td>01/03/2020</td>
-    <td>No</td>
-    <td>Sí</td>
-    <td>DB 3</td>
-  </tr>
+  {% for column in datos %}
+    <tr>
+      <td>{{ a[0] }}</td>
+      <td>{{ a[1] }}</td>
+      <td>{{ a[2] }}</td>
+      <td>{{ a[3] }}</td>
+      <td>{{ a[4] }}</td>
+      <td>{{ a[5] }}</td>
+      <td>{{ a[6] }}</td>
+      <td>{{ a[7] }}</td>
+    </tr>
+  {% endfor %}
 </table>
 {% endblock %}
