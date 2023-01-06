@@ -47,7 +47,6 @@ def query():
   conn = mysql.connector.connect(host='192.168.50.29', user='taskuploguser', password='taskuplogpass', database='taskuplogdb')
   cursor = conn.cursor()
   cursor.execute(query)
-  conn.commit()
   row=cursor.fetchall()
   listadatos = []
   for rows in row:
