@@ -4,7 +4,7 @@
 {% block body %}
 <table>
   <tr>
-    <th>Servidor</th>
+    <th><a href="/">Servidor</a></th>
     <th>Plugin</th>
     <th>Versión</th>
     <th>Fecha</th>
@@ -14,14 +14,13 @@
   </tr>
   {% for column in datos %}
     <tr>
-      <td>{{ a[0] }}</td>
-      <td>{{ a[1] }}</td>
-      <td>{{ a[2] }}</td>
-      <td>{{ a[3] }}</td>
-      <td>{{ a[4] }}</td>
-      <td>{{ a[5] }}</td>
-      <td>{{ a[6] }}</td>
-      <td>{{ a[7] }}</td>
+      <td>{{ column[0] }}</td>
+      <td>{{ column[1] }}</td>
+      <td>{{ column[2] }}</td>
+      <td>{{ column[3] }}</td>
+      <td>{{ column[4] }}</td>
+      <td>{{ column[5] }}</td>
+      <td>{{ column[6] }}</td>
     </tr>
   {% endfor %}
 </table>
