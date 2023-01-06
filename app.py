@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/',methods=["GET"])
 def inicio():
-    return render_template("insert.html",errormesaje=" ")
+    return render_template("form.html",errormesaje=" ")
 
 # Ruta que maneja el envío del formulario
 @app.route('/insertar', methods=['POST'])
@@ -33,13 +33,13 @@ def insertar():
     cursor.execute(query, values)
     conn.commit()
   except IntegrityError:
-    return render_template("insert.html",errormesaje="Error: Registro Duplicado")
+    return render_template("form.html",errormesaje="Error: Registro Duplicado")
 
   # Cerrar cursor y conexión
   cursor.close()
   conn.close()
   
-  return render_template("insert.html",errormesaje=" ")
+  return render_template("form.html",errormesaje=" ")
 
 # Ruta que realiza la consulta a la db
 @app.route('/query', methods=['GET','POST'])
