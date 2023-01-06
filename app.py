@@ -2,6 +2,7 @@
 
 from flask import Flask, request, render_template
 import mysql.connector
+from mysql.connector.errors import IntegrityError
 
 app = Flask(__name__)
 
@@ -21,15 +22,18 @@ def insertar():
   premium = 1 if 'premium' in request.form else 0
   db = 1 if 'db' in request.form else 0
 
-  # Crear consulta de inserción
-  query = "INSERT INTO registro (servidor, plugin, version, fecha, obsoleto, premium, db) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-  values = (servidor, plugin, version, fecha, obsoleto, premium, db)
+  try:
+    # Crear consulta de inserción
+    query = "INSERT INTO registro (servidor, plugin, version, fecha, obsoleto, premium, db) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+    values = (servidor, plugin, version, fecha, obsoleto, premium, db)
 
-  # Conectarse a la base de datos y ejecutar consulta
-  conn = mysql.connector.connect(host='192.168.50.29', user='taskuploguser', password='taskuplogpass', database='taskuplogdb')
-  cursor = conn.cursor()
-  cursor.execute(query, values)
-  conn.commit()
+    # Conectarse a la base de datos y ejecutar consulta
+    conn = mysql.connector.connect(host='192.168.50.29', user='taskuploguser', password='taskuplogpass', database='taskuplogdb')
+    cursor = conn.cursor()
+    cursor.execute(query, values)
+    conn.commit()
+  except IntegrityError:
+    return render_template("insert.html",errormesaje="Error: Registro Duplicado")
 
   # Cerrar cursor y conexión
   cursor.close()
