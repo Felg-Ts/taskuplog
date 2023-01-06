@@ -37,5 +37,26 @@ def insertar():
   
   return render_template("insert.html",errormesaje=" ")
 
+# Ruta que realiza la consulta a la db
+@app.route('/query', methods=['GET','POST'])
+def query():
+  # Crear consulta de inserción
+  query = "select servidor,plugin,version,fecha,obsoleto,premium,db from registro"
+
+  # Conectarse a la base de datos y ejecutar consulta
+  conn = mysql.connector.connect(host='192.168.50.29', user='taskuploguser', password='taskuplogpass', database='taskuplogdb')
+  cursor = conn.cursor()
+  cursor.execute(query)
+  conn.commit()
+  row=cursor.fetchall()
+  listadatos = []
+  for rows in row:
+    listadatos.append(rows)
+  # Cerrar cursor y conexión
+  cursor.close()
+  conn.close()
+  
+  return render_template("query.html",datos=listadatos,errormesaje=" ")
+
 if __name__ == '__main__':
   app.run("0.0.0.0",5000,debug=True)
