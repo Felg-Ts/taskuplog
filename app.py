@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/',methods=["GET"])
 def inicio():
-    return render_template("form.html",errormesaje=" ")
+    return render_template("form.html")
 
 # Ruta que maneja el envío del formulario
 @app.route('/insertar', methods=['POST'])
@@ -45,7 +45,7 @@ def insertar():
 @app.route('/query', methods=['GET'])
 def query():
   # Crear consulta de inserción
-  query = "select servidor,plugin,version,fecha,obsoleto,premium,db from registro"
+  query = "select servidor,plugin,version,fecha,CASE obsoleto WHEN 1 THEN 'Sí' ELSE 'No' END AS obsoleto,CASE premium WHEN 1 THEN 'Sí' ELSE 'No' END AS premium,CASE db WHEN 1 THEN 'Sí' ELSE 'No' END AS db from registro"
 
   # Conectarse a la base de datos y ejecutar consulta
   conn = mysql.connector.connect(host='192.168.50.28', user='taskuploguser', password='taskuplogpass', database='taskuplogdb')
@@ -59,7 +59,7 @@ def query():
   cursor.close()
   conn.close()
   
-  return render_template("query.html",datos=listadatos,errormesaje=" ")
+  return render_template("query.html",datos=listadatos)
 
 if __name__ == '__main__':
   app.run("0.0.0.0",5000,debug=True)
