@@ -28,7 +28,7 @@ def insertar():
     values = (servidor, plugin, version, fecha, obsoleto, premium, db)
 
     # Conectarse a la base de datos y ejecutar consulta
-    conn = mysql.connector.connect(host='192.168.50.29', user='taskuploguser', password='taskuplogpass', database='taskuplogdb')
+    conn = mysql.connector.connect(host='192.168.50.28', user='taskuploguser', password='taskuplogpass', database='taskuplogdb')
     cursor = conn.cursor()
     cursor.execute(query, values)
     conn.commit()
@@ -42,13 +42,13 @@ def insertar():
   return render_template("form.html",errormesaje=" ")
 
 # Ruta que realiza la consulta a la db
-@app.route('/query', methods=['GET','POST'])
+@app.route('/query', methods=['GET'])
 def query():
   # Crear consulta de inserción
   query = "select servidor,plugin,version,fecha,obsoleto,premium,db from registro"
 
   # Conectarse a la base de datos y ejecutar consulta
-  conn = mysql.connector.connect(host='192.168.50.29', user='taskuploguser', password='taskuplogpass', database='taskuplogdb')
+  conn = mysql.connector.connect(host='192.168.50.28', user='taskuploguser', password='taskuplogpass', database='taskuplogdb')
   cursor = conn.cursor()
   cursor.execute(query)
   row=cursor.fetchall()
