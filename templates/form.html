@@ -5,13 +5,13 @@
 <form method="post" action="/insertar">
   <h1>Registro De Actualizaciones</h1>
   <label for="server">Servidor:</label><br>
-  <input type="text" id="server" name="server"><br>
+  <input type="text" id="server" name="server" required><br>
   <label for="plugin">Plugin:</label><br>
-  <input type="text" id="plugin" name="plugin"><br>
+  <input type="text" id="plugin" name="plugin" required><br>
   <label for="version">Versión:</label><br>
-  <input type="text" id="version" name="version"><br>
+  <input type="text" id="version" name="version" required><br>
   <label for="date">Fecha:</label><br>
-  <input type="date" id="date" name="date"><br>
+  <input type="date" id="date" name="date" required><br>
   <label for="obsolete">Obsoleto: </label>
   <input type="checkbox" id="obsolete" name="obsolete"><br><br>
   <label for="obsolete">Premium: </label>
@@ -21,7 +21,7 @@
   <input type="submit" value="Enviar">
   <p style="color: rgb(141, 22, 22)">{{errormesaje}}</p>
 </form>
-<form method="post" action="/query">
+<form method="get" action="/query">
   <input type="submit" value="Ver Registro">
 </form>
 {% endblock %}
