@@ -1,6 +1,5 @@
 body {
-    background: linear-gradient(to right, orange, #ec38bc, #7303c0, cyan);   
-
+  background: linear-gradient(to right, #000046, #1cb5e0);  
 }
 
 table {
@@ -9,13 +8,15 @@ table {
 }
 
 th, td {
-  border: 1px solid #dddddd;
+  background-color: #ffffffd8;
+  border: 1px solid #000000;
   text-align: left;
   padding: 8px;
 }
 
 tr:nth-child(even) {
-  border: 1px solid #dddddd;
+  background-color: #dddddd7b;
+  border: 1px solid #000000;
   text-align: left;
   padding: 8px;
 }
