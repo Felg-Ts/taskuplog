@@ -45,7 +45,7 @@ def insertar():
 @app.route('/query', methods=['GET'])
 def query():
   # Crear consulta de inserción
-  query = "select servidor,plugin,version,fecha,CASE obsoleto WHEN 1 THEN 'Sí' ELSE 'No' END AS obsoleto,CASE premium WHEN 1 THEN 'Sí' ELSE 'No' END AS premium,CASE db WHEN 1 THEN 'Sí' ELSE 'No' END AS db from registro"
+  query = "select servidor,plugin,version,date_format(fecha, '%d-%m-%Y') AS fecha,CASE obsoleto WHEN 1 THEN 'Sí' ELSE 'No' END AS obsoleto,CASE premium WHEN 1 THEN 'Sí' ELSE 'No' END AS premium,CASE db WHEN 1 THEN 'Sí' ELSE 'No' END AS db from registro"
 
   # Conectarse a la base de datos y ejecutar consulta
   conn = mysql.connector.connect(host='192.168.50.28', user='taskuploguser', password='taskuplogpass', database='taskuplogdb')
