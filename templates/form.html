@@ -5,7 +5,12 @@
 <form method="post" action="/insertar">
   <h1>Registro De Actualizaciones</h1>
   <label for="server">Servidor:</label><br>
-  <input type="text" id="server" name="server" required><br>
+  <select name="server" id="server" required>
+    <option value="">Selecciona un servidor</option>
+    <option value="Bungee">Bungee</option>
+    <option value="Lobby">Lobby</option>
+    <option value="Survival">Survival</option>
+  </select><br><br>
   <label for="plugin">Plugin:</label><br>
   <input type="text" id="plugin" name="plugin" required><br>
   <label for="version">Versión:</label><br>
